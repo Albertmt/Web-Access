@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<selectner>
+	<Category name="Business">
+		<select toc="MailingList">
+			<sample>MailingListId</sample>
+			<sample>Prefix</sample>
+			<sample>First Name</sample>
+			<sample>Last Name</sample>
+			<sample>Middle Name</sample>
+		</select>
+		<select toc="Tasks">
+			<sample>TasksId</sample>
+			<sample>TaskDescription</sample>
+			<sample>Start Date</sample>
+			<sample>End Date</sample>
+			<sample>Nodes</sample>
+		</select>
+		<select toc="Students">
+			<sample>StudentId</sample>
+			<sample>First Name</sample>
+			<sample>Middle Name</sample>
+			<sample>Last Name</sample>
+			<sample>Parents Names</sample>
+			<sample>Address</sample>
+			<sample>City</sample>
+			<sample>StateOrProvince</sample>
+			<sample>Postal Code</sample>
+			<sample>Phone Number</sample>
+			<sample>Home Number</sample>
+		</select>
+	</Category>
+	<Category name="Personal">
+		<select toc="Addresses">
+			<sample>AdressId</sample>
+			<sample>First Name</sample>
+			<sample>Last Name</sample>
+			<sample>Middle Name</sample>		
+		</select>
+		<select toc="Guests">
+			<sample>GuestId</sample>
+			<sample>Prefix</sample>
+			<sample>First Name</sample>
+			<sample>Last Name</sample>
+			<sample>Middle Name</sample>
+		</select>
+		<select toc="Evayln">
+			<sample>EvaylnId</sample>
+			<sample>Prefix 1</sample>
+			<sample>First Name 2</sample>
+			<sample>Last Name 3</sample>
+			<sample>Middle Name 4</sample>
+		</select>
+	</Category>
+</selectner>

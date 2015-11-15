@@ -1,0 +1,457 @@
+<!--sa piti lini-->
+
+<html>
+	<head>
+	<script type="text/jscript" src="Tool.js"></script>
+	<script type="text/javascript" src="event.js"></script>
+	<script type="text/jscript" src="myLab.js"></script>
+	<script type="text/jscript" src="myLib.js"></script>
+	<script type="text/jscript" src="getNodeById.js"></script>
+	<style>
+	
+	.style1{border:outset 2px white;background:rgb(212,208,200);height:360;width:480;}
+	.style2{border:groove 2px white;height:50;width:140;}
+	.style3{position:absolute;top:100;left:150;}
+	.style4{position:absolute;top:130;left:150;}
+	
+	.over{border:outset 1px;}
+	.down{border:inset 1px;}
+	.default{border:solid 1px rgb(212,208,200);}
+	
+	</style>
+	
+	<script>
+	
+	function ATable(){
+		var sp=document.createElement("span");
+		sp.className="style1";
+		sp.style.position="absolute";
+		sp.style.left=20;
+		sp.style.top=20;
+		sp.id="Aspan"
+		var img1=document.createElement("img");img1.src="TableWizard.bmp";
+		img1.id="a1";
+		sp.appendChild(img1);
+		var span1=document.createElement("span");
+		span1.onclick=Achoose;
+		span1.className="style2";
+		sp.appendChild(span1);
+		
+		alert(span1.outerHTML)
+		span1.innerHTML+='<input type="radio" id="54" checked="true" name="bus"> Business<br><input type="radio" id="55" name="bus"> Personal'
+	
+		sp.appendChild(document.createElement("br"));
+		var img2=document.createElement("img");
+		img2.src="st.bmp";
+		sp.appendChild(img2);
+		var form=document.createElement("form");form.name="form1";form.id="form1";
+		form.innerHTML+="<select onclick='SampleTables();' style='width:100'name='arajin' id='arajin' size='6'>";
+		var img3=document.createElement("img");
+		img3.src="sampleFields.bmp"
+		img3.className="style3";
+		form.appendChild(img3);
+		form.innerHTML+="<select onclick='SampleTables();' style='position:absolute;width:100;top:120;left:150;''name='erkrord' id='erkrord' size='10'>";
+	
+		form.innerHTML+="</select><input type='button' value='   >   ' style='width:50;position:absolute;top:150;left:270;' onclick='Agcel();'>"+
+			"<input type='button' value='  >>  ' style='width:50;position:absolute;top:180;left:270;' onclick='lrivgcel()'>"+
+			"<input type='button' value='   <   ' style='width:50;position:absolute;top:210;left:270;' onclick='Ajnjel()'>"+
+			"<input type='button' value='  <<  '  style='width:50;position:absolute;top:240;left:270;' onclick='lrivjnjel()'>"+
+			"<select id='errord' name='errord' style='position:absolute;top:120;left:335;width:100' size='8' width='25'>"+
+				"<option value='1' >Mailing List ID</option>"+
+			"</select>			<input style='position:absolute;top:270;left:335' type='button' value='Rename Field...' onclick='rename()'>";
+			form.innerHTML+="<input style='position:absolute;top:330;left:350;'type='button' value='Cancel' onclick='Aexit()'><input style='position:absolute;top:330;left:420;'type='button' value='finish' onclick='finish();Aexit()'>"
+		sp.appendChild(form);
+		sp.appendChild(document.createElement("hr"));
+		var div=document.getElementById("divId");
+		div.appendChild(sp);
+		ASecond();
+	}
+	function Aexit(){
+	var sdd=document.getElementById("Aspan");
+	sdd.parentElement.removeChild(sdd);
+	}
+	function finish(){
+	var anv = document.getElementById("anvanagrum")
+	var erro=document.getElementById("errord");
+	for(var h=0;h<erro.childNodes.length;h++)
+	{Aimn[h]=erro.childNodes(h).innerHTML;}
+	//alert(erro.childNodes(h).innerHTML);
+	if(anv == null){
+	var d = '<div id ="anvanagrum" align=right style="height:10;width:150;background-color:rgb(212,208,200);"><input type="text" id="K' + qan + '"><input type="button" value="Close" onclick="Poshmanele()"><input type="button"  value="OK" onclick="E2()"></div>'
+	document.body.innerHTML+=d
+	}
+	}
+	
+	function E2(){
+		var c = document.getElementById("k" + qan)
+		if(c.value!=""){
+		alert("barlus")
+		XMLcreator1(c.value);
+		qan++
+		c.parentElement.parentElement.removeChild(c.parentElement)
+		}
+		else{
+		alert('Insert file name')
+		}
+	}
+	
+	var sv = 0
+	var anunneriq = 0;
+	var qan = 1
+	var myArray = new Array("Text","Number","Data");
+	var Aimn = new Array();
+var SArray = new Array();
+var root;
+var Aroot;
+var xmlDoc = null
+var fso = new ActiveXObject("Scripting.FileSystemObject");
+var out = "";
+var indent = 0;
+var filename = 'C:\\Documents and Settings\\David\\Desktop\\norAccesADnor\\Xmltool.xml'
+//'C:\\Documents and Settings\\David\\Desktop\\norAccesAD\\Xmltool.xml'
+//"C:\\Documents and Settings\\Albert\\Desktop\\norAcces\\Xmltool.xml"
+//var filename  = "C:\\Documents and Settings\\user.EIF\\Desktop\\norAcces\\Xmltool.xml"
+//"C:\\Documents and Settings\\user.EIF\\Desktop\\norAcces\\Xmltool.xml";
+var xmlDoc = null
+var root
+
+function replaceSymbol(s, c1, c2) {
+	for(var i = 0; i < s.length; i++){		
+		if(s.substring(i, i+c1.length) == c1){
+			s = s.substring(0, i) + c2 + s.substring(i+c1.length, s.length);
+		}
+	}
+	return s;
+}
+
+
+function Hreft(){
+var pathOfIndex = location.href;
+pathOfIndex = pathOfIndex.substring(0,pathOfIndex.lastIndexOf('/'));
+pathOfIndex = pathOfIndex.substring(8,pathOfIndex.length);
+var searchStr = "/";
+var replaceStr = "\\\\";
+var re = new RegExp(searchStr , "g");
+pathOfIndex = pathOfIndex.replace(re, replaceStr);
+pathOfIndex = unescape(pathOfIndex);
+pathOfIndex+='\\\\Xmltool.xml'
+filename = pathOfIndex
+//alert(filename)
+//SaveToFile(
+}
+function SaveToFile(file, str) {
+	var f;
+	var ForReading = 1, ForWriting = 2;
+	f = fso.OpenTextFile(file, ForWriting, true);
+	f.Write(str);
+	f.Close();
+}
+function xmlToString(elem) {
+   if(elem)  {
+      var attrs = elem.attributes;
+      var attr;
+      var i;
+      var childs = elem.childNodes;
+
+      //for (i = 0; i < indent; i++) out += "  ";
+      out += "<" + elem.nodeName;
+//      for (i = attrs.length-1; i >= 0; i--)
+      for (i = 0; i < attrs.length; i++)
+      {
+         attr = attrs.item(i);
+         out += " " + attr.nodeName + "=\"" + attr.nodeValue+ "\"";
+      }
+
+      if (elem.hasChildNodes())
+      {
+         out += ">";
+         indent++;
+         for (i = 0; i < childs.length; i++)
+         {
+            if (childs.item(i).nodeType == 1) // element node ..
+               xmlToString(childs.item(i));
+            else 
+		if (childs.item(i).nodeType == 3) // text node ..
+		{
+               		//for ( j = 0; j < indent; j++) out += "  ";
+               		out += childs.item(i).nodeValue;
+            	}
+         }
+         indent--;
+        // for (i=0; i < indent; i++) out += "  ";
+         out += "</" + elem.nodeName + ">";
+      }
+      else
+      {
+         out += " />";
+      }
+
+   }
+   
+   return out;
+}
+
+function E1(){
+	var c = document.getElementById("k" + qan)
+	//if(c.value!=""){
+	if(c.value!=""){
+	XMLcreator(c.value)
+	qan++
+	c.parentElement.parentElement.removeChild(c.parentElement)
+	}else{
+	alert('Insert file name')
+	}
+	//}else
+	//alert('Nermucec anun@')
+}
+	
+function Poshmanele(){
+	var get = document.getElementById("anvanagrum")
+	get.parentElement.removeChild(get)
+	}
+
+function Anvanagrum(){
+	var anv = document.getElementById("anvanagrum")
+	//for(var b = 0;b <= qan;b++){
+	if(anv == null){
+	var d = '<div id ="anvanagrum" align=right style="height:10;width:150;background-color:rgb(212,208,200);"><input type="text" id="k' + qan + '"><input type="button" value="Close" onclick="Poshmanele()"><input type="button"  value="OK" onclick="E1()"></div>'
+	//var div=document.getElementById("divId");
+	//div.innerHTML+=d;
+	document.body.innerHTML+=d
+	}
+
+	//qan++
+
+	//while(c.value == "")
+	//{
+	//}
+
+	}
+	
+function M(){
+var y = document.getElementById("f")
+y.parentElement.removeChild(y)
+
+}
+function E(){
+var out2 = ""
+var s
+for(var t =0;t< f;t++){
+if(Array[t] != -1){
+s = document.getElementById("I" + Array[t]) 
+out2 +=' ' + s.value
+}
+}
+alert(out2)	
+
+}
+function Jnjel(){
+var h = document.getElementById("SP1")
+h.parentElement.removeChild(h);
+}
+function Skizb(){
+XMLcreator()
+//var x = document.getElementById("Ba")
+//x.style.background = "blue"
+//var d = document.getElementById("SP1")
+//d.parentElement.removeChild(d)
+}
+function A()
+{
+var k = '<input type="button" value="Table1"  id="f">'
+var h = document.getElementById("u")
+
+u.innerHTML+=k;
+//var y = document.getElementById("SP")
+//y.parentElement.removeChild(y)
+
+//var t = document.getElementById("IDD")
+//var u = "Jan" + t.value
+//alert(u)
+}
+var f = 0;
+function B(){
+var y = document.getElementById("SP")
+var h = '<div id="DID'+f+'" ><div margine="0" style="width:600;"><input type="text" id="I' + f + '"><select name="firstname1" >'
+h +='<option value="Text">Text</option> '
+h +='<option value="0">Number'
+h +='<option value="1">Data'
+h +='</select><input type="text" size=55><img src="Xach.bmp"  onclick = "D(this,' + f + ')"</div></div>'
+Array[f]=f;
+f++
+y.innerHTML+=h;
+}
+function D(elem,h){
+Array[h]= -1
+elem.parentElement.parentElement.removeChild(elem.parentElement)
+}
+	var myArray = new Array();
+var SArray = new Array();
+//function M(){
+//var y = document.getElementById("f")
+//y.parentElement.removeChild(y)
+//}
+function M(){
+var y = document.getElementById("f")
+y.parentElement.removeChild(y)
+
+}
+function E(){
+var out2 = ""
+var s
+for(var t =0;t< f;t++){
+if(Array[t] != -1){
+s = document.getElementById("I" + Array[t]) 
+out2 +=' ' + s.value
+
+}
+}
+alert(out2)	
+
+
+}
+function Save()
+{
+var k = '<img src="access.bmp"  id="f" ><span onclick="Skizb()" id="Ba">Table1  <br></span>'
+var h = document.getElementById("u")
+
+u.innerHTML+=k;
+//var y = document.getElementById("SP")
+//y.parentElement.removeChild(y)
+
+//var t = document.getElementById("IDD")
+//var u = "Jan" + t.value
+//alert(u)
+}
+
+function Create(){
+var y = document.getElementById("SP1")
+var h = '<div id="DID' + anunneriq + '" ><div margine="0" style="width:600;"><input type="text" id="I' + anunneriq + '"><select name="firstname1" >'
+h +='<option value="Text">Text</option> '
+h +='<option value="0">Number'
+h +='<option value="1">Data'
+h +='</select><input type="text" size=55><input type="Button" value=" X "  onclick = "Pakel(this,' + anunneriq + ')"</div></div>'
+Array[anunneriq]=anunneriq;
+anunneriq++;
+//alert(anunneriq)
+y.innerHTML+=h;
+}
+function ad(sp){
+sp.style.color='white'
+}
+function Pakel(elem,h){
+Array[h]= -1
+elem.parentElement.parentElement.removeChild(elem.parentElement)
+}
+function Stexcel(){
+var get = document.getElementById("SP1")
+if(get == null){
+var d = '<span class="style4" style="top:200;left:20;background-color:rgb(212,208,200);height:200;width:500;outset 2px white;border:outset 2px white;" id="SP1">'
+//d +='<input type="text" id="IDD" size =100> '
+d += '<span id="a2" style="height:5;width:600;background-image:url(fon1.bmp);" ></span>';
+d +='<input type="button" onclick="Anvanagrum();" value="Save">';
+d += '<input type="button" onclick="Create()" value="Create">';
+//d += '<input type="button" onclick="E1()" value="">';
+
+d += '<input type="button" onclick="Jnjel()" value="Delete">'
+/*for(var z = 0;z < 5;z++){
+d+='<div id="DID' + anunneriq + '" ><div margine="0" style="width:600;"><input type="text" id="I' + anunneriq + '"><select name="firstname1" >'
+d +='<option value="Text">Text</option> '
+d +='<option value="0">Number'
+d +='<option value="1">Data'
+d +='</select><input type="text" size=55><input type="Button" value=" X "  onclick = "Pakel(this,' + anunneriq + ')"</div></div>'
+}*/
+d +='</span>';
+var div=document.getElementById("divId");
+div.innerHTML+=d;
+}
+}
+	var n=true,m=true;
+	function texcel(){
+		if(n){
+		var str="<span style=\"cursor:default;\"onclick=\"select(this);ad(this);\"> <img src='access.bmp' onclick=\"Stexcel()\"> Create table in Design view</span><br> <img onclick='ATable();' src='access.bmp'> Create table by using wizard<br>";
+		var sp=document.getElementById("u");
+		sp.innerHTML+=str;n=!n;}
+	}
+	
+	function select(im){
+		if(m)
+		im.style.background="darkblue";
+		m=!m;
+	}
+	
+	function load(){
+		document.onmousedown = docMouseDown;
+		document.onmouseup = docMouseUp;
+		document.onmousemove = docMouseMove;
+		}
+		
+	function close1(){
+		var a=document.getElementById("divId");
+		var b=document.getElementById("spanId");
+		a.removeChild(b);
+		}
+		
+		function xmlkanch(){
+	
+			xmlDoc = document.getElementById("xmldoc");
+			xmlDoc.load("Xmltool.xml") 
+			root =  xmlDoc.documentElement;
+			for(var qa = 0;qa <= 1000;qa++)
+			nodnum[qa] = 5;
+		}
+		
+		function Load1(){
+		xmlDoc = document.getElementById("xmldoc");
+		xmlDoc.load("Xmltool.xml") 
+		root =  xmlDoc.documentElement;
+		}
+		
+		
+	function Verbernum(){
+		var b;
+		w = 0;
+		var t = document.getElementById("u")
+		//var e = xmlDoc.getElementsByTagName("table" + w)[0]
+		var e=GetNodeById(root,w);
+		while(e != null){
+			b = e.attributes.item(1).nodeValue
+			w++
+		//t.innerHTML+='<input type="button" value="' + b + '" onclick="XMLdemo(' + (w - 1)  +')" id="t' + (w-1) + '">'
+		t.innerHTML+='<span id="t' + (w - 1) +'"><img src="access.bmp"  onclick="XMLdemo(' + (w - 1)  +')"> '+ b +'<br></span>';
+		//e = xmlDoc.getElementsByTagName("table" + w)[0]
+		var e=GetNodeById(root,w);
+		}
+	
+	}
+		
+	</script>
+	
+	<title>Barev</title>
+	</head>
+	<body onLoad="load();texcel();xmlkanch();Verbernum();Hreft();AFirst()">
+	<xml src="Xmltool.xml" id="xmldoc"></xml>
+	<xml src="first.xml" id="Axmldoc"></xml>
+	<div id="divId" style="height:300">
+	<span id="spanId" style="position:absolute; left:0; top:0;background-color:rgb(212,208,200);border:outset 2px white;height:200 px;width:400px">
+		<span id="spanikId" style="margin:2px;width:400px;height:12px;background-image:url(fon.bmp);color:white">
+		<img src="icon.bmp" style="margin-left:2px">
+		db1:Database
+		<img src="1.bmp" style="margin-top:3px;position:absolute;right:40;border:outset 2px">
+		<img src="2.bmp" style="margin-top:3px;position:absolute;right:22px;border:outset 2px">
+		<img src="3.bmp" style="margin-top:3px;position:absolute;right:3px;border:outset 2px" onmouseup="close1();">
+		</span>
+		<img src="open.bmp" class='default' onmouseover="this.className='over'" onmouseout="this.className='default'" onmousedown="this.className='down'" onclick="Stexcel()">
+		<img src="design.bmp" class='default' onmouseover="this.className='over'" onmouseout="this.className='default'" onmousedown="this.className='down'">
+		<img src="New.bmp" class='default' onmouseover="this.className='over'" onmouseout="this.className='default'" onmousedown="this.className='down'" >
+		<img src="delete.bmp">
+		<img src="zuyg.bmp" class='default' onmouseover="this.className='over'" onmouseout="this.className='default'" onmousedown="this.className='down'" >
+		<img src="sexmac.bmp">
+		<img src="toxac.bmp" class='default' onmouseover="this.className='over'" onmouseout="this.className='default'" onmousedown="this.className='down'" ><br>
+		<span style="border:inset 2px;height:150">Objects<br><input type="button" value=" Tables" onclick="texcel();"><br><input type="button" value="Queries"></span>
+		<span id="u" style="border:inset 2px;height:150;width:315;background:white;"></span>
+	</span>
+	
+	</div>
+	</body>
+</html>
